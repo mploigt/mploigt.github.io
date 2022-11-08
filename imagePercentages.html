@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Find hotspot percentages</title>
+  <style>html {
+    padding: 3em 1em;
+    margin: auto;
+    line-height: 1.75;
+    font-size: 1.25em;
+    font-family: sans-serif;
+  }
+  .image-input {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  img {
+	  width: 100%;
+  }
+  input {
+    padding: 0.25rem;
+    width: 100%;
+    margin-left: 1rem;
+	margin-right: 5px;
+  }
+  </style>
+  <script>
+    const loadImage = url => {
+      document.getElementById("image").src = url;
+    };
+    const printCursorPosition = (event) => {
+      const x = event.clientX;
+      const y = event.clientY;
+      const image = document.getElementById("image");
+      const imageX = image.offsetLeft;
+      const imageY = image.offsetTop;
+      const imageWidth = image.width;
+      const imageHeight = image.height;
+      const xPercent = (x - imageX) / imageWidth * 100;
+      const yPercent = (y - imageY) / imageHeight * 100;
+      document.getElementById("xPercent").innerHTML = xPercent.toFixed(2).toString();
+      document.getElementById("yPercent").innerHTML = yPercent.toFixed(2).toString();
+    };
+  </script>
+</head>
+<body>
+<h1>Find x/y coordinates</h1>
+<div class="image-input">
+  <label for="url">Image&nbsp;URL:</label>
+  <input id="url" name="url" type="text" onBlur="loadImage(this.value)" /><button>ok</button>
+</div>
+<p>
+  X: <span id="xPercent"></span><br />
+  Y: <span id="yPercent"></span>
+</p>
+<img src="" id="image" onClick="printCursorPosition(event)" alt=""/></p>
+</body>
+</html>
